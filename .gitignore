@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# VSCode
+.vscode/
+
+# Virtual Environments
+env/
+venv/
+.venv/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Streamlit & logs
+.streamlit/
+*.log
+
+# Google credentials (IMPORTANT!)
+google_sheets_key.json
+
+# Render deploy secrets (if any)
+*.env
+.secrets/
+
+# Jupyter or Colab
+.ipynb_checkpoints/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows
+desktop.ini
