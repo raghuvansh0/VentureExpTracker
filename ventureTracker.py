@@ -7,6 +7,19 @@ import pandas as pd
 import os
 import json 
 
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    pin = st.text_input("Enter Admin PIN", type="password")
+    if pin == st.secrets["admin_pin"]:
+        st.session_state.authenticated = True
+        st.success("Access granted")
+        st.rerun()
+    else:
+        st.stop()
+
+
 SHEET_NAME = "VentureExpenses"
 HEADERS = ["Date", "Venture", "Category", "Detail", "Final Amount (AD)"]
 
