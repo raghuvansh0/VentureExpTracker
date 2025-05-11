@@ -123,8 +123,12 @@ if not df.empty:
     except:
         st.table(summary_df)    
 
-    grand_total = df["Final Amount (AD)"].sum()
-    st.write(f"Grand Total for all ventures: {grand_total:,.2f}")
+    
+    grand_total = pd.to_numeric(df["Final Amount (AD)"],errors="coerce").sum()
+    if pd.notna(grand_total):
+        st.write(f"Grand Total for all ventures: {grand_total:,.2f}")
+    else:
+        st.write("Grand total for all ventures: 0.00")
 else:
     st.info("No records found. Start by adding an expense.")
 
