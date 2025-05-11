@@ -118,7 +118,10 @@ if not df.empty:
     st.write("Venture-wise Totals:")
     summary_df = df.groupby("Venture")["Final Amount (AD)"].sum().reset_index()
     summary_df.columns = ["Venture", "Total"]
-    st.table(summary_df.style.format({"Total": "{:,.2f}"}))
+    try:
+        st.table(summary_df.style.format({"Total": "{:,.2f}"}))
+    except:
+        st.table(summary_df)    
 
     grand_total = df["Final Amount (AD)"].sum()
     st.write(f"Grand Total for all ventures: {grand_total:,.2f}")
