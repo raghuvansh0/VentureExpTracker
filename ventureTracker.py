@@ -5,6 +5,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from datetime import date 
 import pandas as pd 
 import os
+import json 
 
 SHEET_NAME = "VentureExpenses"
 HEADERS = ["Date", "Venture", "Category", "Detail", "Final Amount (AD)"]
@@ -12,11 +13,8 @@ HEADERS = ["Date", "Venture", "Category", "Detail", "Final Amount (AD)"]
 # Google Sheets auth
 def get_gsheet_client():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    json_path = "google_sheets_key.json"
-    if not os.path.exists(json_path):
-        st.error("google_sheets_key.json not found. Please upload or set correct path.")
-        st.stop()
-    creds = ServiceAccountCredentials.from_json_keyfile_name(json_path, scope)
+    creds_dict = st.secrets["google_sheets_key"]
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict,scope)
     return gspread.authorize(creds)
 
 # Get or initialize the sheet
