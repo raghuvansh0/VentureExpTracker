@@ -35,10 +35,16 @@ def append_to_sheet(record):
 # Fetch all records into a DataFrame
 def fetch_records():
     sheet = get_sheet()
-    data = sheet.get_all_records()
-    if not data:
-        return pd.DataFrame(columns=HEADERS) 
-    return pd.DataFrame(data)
+    values = sheet.get_all_values()
+
+    if not values or len(values) < 2:
+        return pd.DataFrame(columns=HEADERS)
+    df = pd.DataFrame(values[1:],columns=values[0])
+    return df
+    #data = sheet.get_all_records()
+    #if not data:
+    #    return pd.DataFrame(columns=HEADERS) 
+    #return pd.DataFrame(data)
 
 # STREAMLIT UI
 st.title("Venture Expense Tracker")
