@@ -36,6 +36,8 @@ def append_to_sheet(record):
 def fetch_records():
     sheet = get_sheet()
     data = sheet.get_all_records()
+    if not data:
+        return pd.DataFrame(columns=HEADERS) 
     return pd.DataFrame(data)
 
 # STREAMLIT UI
