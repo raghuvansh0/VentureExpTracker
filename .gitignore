@@ -14,13 +14,19 @@ env/
 venv/
 .venv/
 
+
 # System files
 .DS_Store
 Thumbs.db
 
 # Streamlit & logs
+.streamlit/safe_secrets.toml
 .streamlit/
 *.log
+0.secrets/
+*.json
+*.toml
+.env
 
 # Google credentials (IMPORTANT!)
 google_sheets_key.json
@@ -28,7 +34,7 @@ google_sheets_key.json
 # Render deploy secrets (if any)
 *.env
 .secrets/
-
+../0.secrets
 # Jupyter or Colab
 .ipynb_checkpoints/
 
