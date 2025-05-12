@@ -27,7 +27,9 @@ HEADERS = ["Date", "Venture", "Category", "Detail", "Final Amount (AD)"]
 # Google Sheets auth
 def get_gsheet_client():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds_dict = st.secrets["google_sheets_key"]
+    path = st.secrets["google_sheets_key"]
+    with open(path,"r") as f:
+        creds_dict = json.load(f) #this is dictionary now
     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict,scope)
     return gspread.authorize(creds)
 
@@ -54,6 +56,7 @@ def fetch_records():
     if not values or len(values) < 2:
         return pd.DataFrame(columns=HEADERS)
     df = pd.DataFrame(values[1:],columns=values[0])
+    df["Final Amount (AD)"] = pd.to_numeric(df["Final Amount (AD)"],errors="coerce")
     return df
     #data = sheet.get_all_records()
     #if not data:
