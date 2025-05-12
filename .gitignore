@@ -20,7 +20,7 @@ venv/
 Thumbs.db
 
 # Streamlit & logs
-.streamlit/safe_secrets.toml
+.streamlit/secrets.toml
 .streamlit/
 *.log
 0.secrets/
